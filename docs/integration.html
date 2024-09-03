@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Integrating with existing project | MatX React Documentation</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/atelier-savanna.dark.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./assets/vendor/bootstrap/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="./assets/css/doc.min.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="doc-header"></div>
+
+      <div class="doc-content clearfix">
+        <div class="doc-content__sidebar"></div>
+
+        <div class="doc-content__body">
+          <h1 class="doc-section-title" id="overview">
+            Integrating with existing project
+            <a href="#overview" class="section-link"></a>
+          </h1>
+          <p class="lead mb-xl">We recommend using MatX for starting a new project.
+            But if you want to use it with your existing project, follow below steps.</p>
+          <p>
+            <b>1. Merge package.json: </b> Merge your project's <code>package.json</code> with Matx's <code>package.json</code>.
+            You can merge manually by copying the dependencies from Matx to your project's <code>package.json</code>. Or you can use
+            <a href="https://www.npmjs.com/package/merge-package.json" target="_blank">merge-package.json</a>
+          </p>
+          <code
+            class="code"
+            data-code="var merge = require('package-merge')
+var fs = require('fs');
+var dst = fs.readFileSync('package.a.json');
+var src = fs.readFileSync('package.b.json');
+fs.writeFile('/tmp/package.merged.json', merge(dst,src));"></code>
+
+          <p class="">
+            <b>2. Copy files & folders: </b>
+            Make sure your app has <code>src</code> and <code>src/app</code> folder.
+            Copy following folders and files to your project.
+            <ul>
+              <li><code>src/app/auth</code></li>
+              <li><code>src/app/components</code></li>
+              <li><code>src/app/context</code></li>
+              <li><code>src/app/hooks</code></li>
+              <li><code>src/app/views/session</code></li>
+              <li><code>src/app/navigation.js</code></li>
+              <li><code>src/app/routes.jsx</code></li>
+              <li><code>src/app/utils</code></li>
+              <li><code>src/config.js</code></li>
+              <li><code>src/history.js</code></li>
+            </ul>
+          </p>
+
+          <p class="">
+            <b>3. App.js</b> Copy content from Matx's <code>src/app/App.js</code> to your project's <code>src/app/App.js</code>,
+            You can keep the necessary code requred by your project.
+          </p>
+
+          <p class="">
+            <b>4. Define Child Routes:</b> Matx has all the pages inside <code>views</code> folder.
+            It doesn't matter where you keep your pages. But you need to maintain route definition
+            structure.
+          </p>
+          <p>
+            For example, you have order related pages in <code>order</code> folder. You should have
+            <code>OrderRoutes.js</code> for those pages.
+            <ul>
+              <li><code>OrderList.jsx</code></li>
+              <li><code>SingleOrder.jsx</code></li>
+              <li><code>OrderRoutes.js</code></li>
+            </ul>
+          </p>
+
+          <code
+            class="code"
+            data-code='//OrderRoutes.js
+import React from "react";
+
+const orderRoutes = [
+  {
+    path: "/order/list",
+    component: React.lazy(() => import("./OrderList"))
+  },
+  {
+    path: "/order/:id",
+    component: React.lazy(() => import("./SingleOrder"))
+  }
+];
+
+export default orderRoutes;
+            '></code>
+
+          <p><b>5. Define Root Route:</b> MatX has a main route file <code>app/routes.jsx</code> that you've already copied to your project.
+            Now you have to import all the child routes(e.x. <code>OrderRoutes.js</code>) into <code>app/routes.jsx</code>.
+          </p>
+
+          <code
+            class="code"
+            data-code='//routes.jsx
+
+  element: (
+    <AuthGuard>
+        <MatxLayout />
+    </AuthGuard>
+  ),
+  children: [
+    ...OrderRoutes,
+
+    // More other routes
+  ]
+'></code>
+
+        <p><b>5. Import Material Icons:</b> Import material icons in your <code>index.html</code>
+        </p>
+
+        <code class="code" data-code='
+<link
+  href="https://fonts.googleapis.com/css?family=Material+Icons"
+  rel="stylesheet"
+/>
+        '></code>
+
+
+        </div>
+        <div class="doc-content__secondary-sidebar">
+          <ul>
+            <li>
+              <a href="#overview">overview</a>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/vendor/jquery-3.4.1.min.js"></script>
+    <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+    <script src="./assets/vendor/feather.min.js"></script>
+    <script src="./assets/vendor/clipboard.min.js"></script>
+
+    <script src="./assets/js/es5/doc.min.js"></script>
+    <script src="./assets/js/es5/header.min.js"></script>
+    <script src="./assets/js/es5/sidebar.min.js"></script>
+  </body>
+</html>

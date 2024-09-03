@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Authentication | Matx React Documentation</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/atelier-savanna.dark.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./assets/vendor/bootstrap/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="./assets/css/doc.min.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="doc-header">
+
+      </div>
+
+      <div class="doc-content clearfix" >
+        <div class="doc-content__sidebar">
+        </div>
+
+        <div class="doc-content__body">
+
+
+          <h1 class="doc-section-title" id="Authentication">
+            Authentication
+          </h1>
+
+          <h3 class="doc-section-title" id="how-it-works">
+            How it works
+            <a href="#how-it-works" class="section-link"></a>
+          </h3>
+          <p>
+            MatX uses <code>AuthGuard</code> component to protect auth protected routes. In <code>App.jsx</code> entire application is wrapped
+            by <code>AuthProvider</code>
+          </p>
+
+
+
+              <code class="code" lang="javascript" data-code='
+import { AuthProvider } from "src/app/contexts/FirebaseAuthContext";
+              '>
+              </code>
+          <p>Here <code>AuthProvider</code> is imported from <code>FirebaseAuthContext</code>.
+          You will find other authProviders for <code>JWT</code> & <code>Auth0</code> in <code>src/app/contexts/</code> folder.
+          </p>
+
+          <code class="code" lang="xml" data-code="return (
+<Provider store={Store}>
+    <SettingsProvider>
+        <MatxTheme>
+            <AuthProvider>{content}</AuthProvider>
+        </MatxTheme>
+    </SettingsProvider>
+</Provider>
+);"></code>
+
+        <p>As we have wrapped our application by <code>AuthProvider</code>,
+          we can access authenticated user anywhere using <code>useAuth</code> custom hook from <code>src/app/hooks/useAuth.js</code></p>
+
+          <code class="code" lang="javascript" data-code='
+const { user, isAuthenticated } = useAuth();
+
+'>
+          </code>
+          <h3 class="doc-section-title" id="switching">
+            How to switch between authentication methods
+            <a href="#switching" class="section-link"></a>
+          </h3>
+        <p>MatX has multiple authentication method such as Firebase, Auth0 & JWT.
+            By defalut Firebase is being used. But you can switch to another method.</p>
+
+        <p>1. Open <code>App.jsx</code> and update the import path of <code>AuthProvider</code>.
+        By default we're using <code>Firbase</code>. If you want to use <code>JWT</code> method then your import should be like this</p>
+        <code class="code" lang="javascript" data-code='
+import { AuthProvider } from "src/app/contexts/JWTAuthContext";
+              '>
+              </code>
+
+        <p>2. Open <code>src/app/hooks/useAuth.js</code> and update the import path of
+        <code>AuthContext</code>. By default we are using <code>FirebaseAuthContext</code>.
+          For <code>JWT</code> method, your import should be like this
+      </p>
+
+        <code class="code" lang="javascript" data-code='
+import AuthContext from "src/app/contexts/JWTAuthContext";
+                      '>
+                      </code>
+        <p>3. Update <code>session/signin</code> & <code>session/signup</code> in <code>views/sessions/SessionRoutes.js</code> <br>
+          For example, if you use JWT method use <code>JwtLogin.jsx</code> & <code>JwtRegister.jsx</code>
+        </p>
+        <p>4. Update <code>firebaseConfig</code>/<code>auth0Config</code> in <code>src/config.js</code></p>
+
+        <div class="doc-content__secondary-sidebar">
+          <ul>
+              <li><a href="#how-it-works">How it works</a></li>
+              <li><a href="#switching">Switching method</a></li>
+              <!-- <li>
+                <ul>
+                  <li><a href="#import">Import</a></li>
+                  <li><a href="#uses">Uses</a></li>
+                </ul>
+              </li> -->
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="./assets/vendor/jquery-3.4.1.min.js"></script>
+    <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+    <script src="./assets/vendor/feather.min.js"></script>
+    <script src="./assets/vendor/clipboard.min.js"></script>
+
+    <script src="./assets/js/es5/doc.min.js"></script>
+    <script src="./assets/js/es5/header.min.js"></script>
+    <script src="./assets/js/es5/sidebar.min.js"></script>
+  </body>
+</html>

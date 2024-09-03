@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Overview | MatX React Documentation</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/atelier-savanna.dark.css" />
+  <link rel="stylesheet" href="./assets/vendor/bootstrap/css/bootstrap.min.css" />
+
+  <link rel="stylesheet" href="./assets/css/doc.min.css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="doc-header"></div>
+
+    <div class="doc-content clearfix">
+      <div class="doc-content__sidebar"></div>
+
+      <div class="doc-content__body">
+        <h1 class="doc-section-title" id="overview">
+          Overview
+          <a href="#overview" class="section-link"></a>
+        </h1>
+
+        <p class="">
+          Entire app is wrapped by few providers for different purposes, such as authentication,
+          passing routes, MUI theme & optional redux.
+        </p>
+
+        <code class="code" lang="js" data-code="const content = useRoutes(routes);
+
+return (
+  <Provider store={Store}>
+    <SettingsProvider>
+        <MatxTheme>
+        <AuthProvider>{content}</AuthProvider>
+        </MatxTheme>
+    </SettingsProvider>
+  </Provider>
+);"></code>
+
+
+        <p class="">
+          <b>1.</b> <code>&lt;Provider store={Store}&gt;</code> Redux store provider.
+          This is optional if you don't want to use eCommerce, Scrumboard, Chat app.
+        </p>
+
+        <p class="">
+          <b>2.</b> <code>&lt;SettingsProvider&gt;</code> MatX uses context api to set
+          application layout and color themes, for example we can set footer fixed, footer theme, set main theme & etc.
+          <a href="layout.html">Learn more about settings</a>.
+        </p>
+
+        <p class="">
+          <b>3.</b> <code>&lt;MatxTheme&gt;</code> uses MUI's <code>ThemeProvider</code> and set application's
+          main theme.
+        </p>
+
+        <p>
+          <b>4.</b> <code>&lt;AuthProvider&gt;</code> is used for user authentication. <a
+            href="authentication.html">Learn more about authentication</a>.
+        </p>
+
+
+      </div>
+      <div class="doc-content__secondary-sidebar">
+        <ul>
+          <li>
+            <a href="#overview">overview</a>
+
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="./assets/vendor/jquery-3.4.1.min.js"></script>
+  <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+  <script src="./assets/vendor/feather.min.js"></script>
+  <script src="./assets/vendor/clipboard.min.js"></script>
+
+  <script src="./assets/js/es5/doc.min.js"></script>
+  <script src="./assets/js/es5/header.min.js"></script>
+  <script src="./assets/js/es5/sidebar.min.js"></script>
+</body>
+
+</html>

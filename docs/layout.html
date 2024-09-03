@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Layout | MatX React Documentation</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/atelier-savanna.dark.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./assets/vendor/bootstrap/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="./assets/css/doc.min.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="doc-header"></div>
+
+      <div class="doc-content clearfix">
+        <div class="doc-content__sidebar"></div>
+
+        <div class="doc-content__body">
+          <h1 class="doc-section-title" id="layout">
+            Layout
+            <a href="#layout" class="section-link"></a>
+          </h1>
+
+          <p class="text-lead">
+            Entire app is wrapped by <code>SettingsProvider</code>
+          </p>
+          <code
+            class="code"
+            data-code='
+import { SettingsProvider } from "app/contexts/SettingsContext";
+            '></code>
+          <code
+            class="code"
+            data-code='
+<SettingsProvider>
+  <MatxTheme>
+    <GlobalCss>
+      <Router history={history}>
+        <AuthProvider>
+            <MatxSuspense>
+              .
+              .
+              .
+            </MatxSuspense>
+        </AuthProvider>
+      </Router>
+    </GlobalCss>
+  </MatxTheme>
+</SettingsProvider>
+            '></code>
+
+          <p class="text-lead">
+            We can configure layout style by updating settings object
+            <code>MatxLayoutSettings</code> inside
+            <code>app/matx/components/MatxLayout/settings.js</code>
+          </p>
+
+          <h3 class="doc-section-title" id="MatxLayoutSettings">
+            MatxLayoutSettings
+            <a href="#MatxLayoutSettings" class="section-link"></a>
+          </h3>
+
+          <div class="copy-code">
+            <button
+              class="btn btn-sm btn-primary btn-clipboard"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Copy to clipboard"
+            >
+              Copy
+            </button>
+          </div>
+          <code
+            class="code"
+            data-code='
+export const MatxLayoutSettings = {
+
+  activeLayout: "layout1", // layout1, layout2
+  activeTheme: "purple", 
+  perfectScrollbar: true,
+  themes: themes,
+  layout1Settings: {
+    leftSidebar: {
+      show: true,
+      mode: "full", // full, close, compact, mobile,
+      theme: "slateDark1", // View all valid theme colors inside MatxTheme/themeColors.js
+      bgImgURL: "/assets/images/sidebar/sidebar-bg-dark.jpg",
+    },
+    topbar: {
+      show: true,
+      fixed: true,
+      theme: "whiteBlue", // View all valid theme colors inside MatxTheme/themeColors.js
+    },
+  },
+  layout2Settings: {
+    mode: "contained", // boxed | contained | full
+    topbar: {
+      show: true,
+      fixed: true,
+      theme: "slateDark1"
+    },
+    navbar: {
+      show: true,
+      theme: "slateDark2"
+    },
+    leftSidebar: { // Only for mobile devices
+      show: true,
+      mode: "close", // full | close | compact | mobile
+      theme: "slateDark1"
+    }
+  },
+  footer: {
+    show: true,
+    fixed: false,
+    theme: "slate"
+  }
+
+};
+            '
+          >
+          </code>
+          <p>
+            We can also configure layout at runtime by updating settings object using custom hook.
+          </p>
+          <code
+            class="code"
+            data-code='
+import useSettings from "app/hooks/useSettings";
+            '>
+          </code>
+          <code
+            class="code"
+            data-code='
+const { settings, updateSettings } = useSettings();
+
+const updateSidebarMode = () => {
+  updateSettings({
+    layout1Settings: {
+      leftSidebar: {
+        show: flase
+      },
+    },
+  });
+};
+            '>
+          </code>
+          
+        </div>
+        <div class="doc-content__secondary-sidebar">
+          <ul>
+            <li>
+              <a href="#layout">Layout</a>
+              <ul>
+                <li><a href="#MatxLayoutSettings">MatxLayoutSettings</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/vendor/jquery-3.4.1.min.js"></script>
+    <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+    <script src="./assets/vendor/feather.min.js"></script>
+    <script src="./assets/vendor/clipboard.min.js"></script>
+
+    <script src="./assets/js/es5/doc.min.js"></script>
+    <script src="./assets/js/es5/header.min.js"></script>
+    <script src="./assets/js/es5/sidebar.min.js"></script>
+  </body>
+</html>
